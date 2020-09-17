@@ -17,7 +17,8 @@ class WeatherController extends Controller
 
     public function chartData(Request $request)
     {
-        $datas = ThreeDay::where('location',$request->location)->take(8)->get(['dataTime','AT','T','pop6h']);
+        $datas = ThreeDay::where('location',$request->location)
+                           ->take(8)->get(['dataTime','AT','T','pop6h']);
 
         return $datas;
     }

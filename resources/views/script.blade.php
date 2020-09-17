@@ -2,8 +2,8 @@
     $(function(){
 
 
-      getChartData(1);
-      function getChartData($location){
+      setChartData(1);
+      function setChartData($location){
         var times = [];
         var Tlist =  [];
         var ATlist = [];
@@ -11,9 +11,102 @@
         axios.post('/chart',{
           location: 1,
         }).then(function(obj){
-          console.log(obj.data);
+          var list = obj.data;
+
+          list.forEach(data => {
+            times.push(data.dataTime);
+            Tlist.push(data['T']);
+            ATlist.push(data['AT']);
+          });
+          $("#chart").empty();
+          drawDayChart(times,Tlist,ATlist);
         })
       }
+
+
+      //chart.js
+      function drawDayChart(timeList,TList,ATList){
+        //取陣列中的最小值
+        var CminT = Math.min(...TList);
+
+        
+        $("#chart").append($(`<canvas id="chartCanvas"></canvas>`));
+        var ctx = document.getElementById("chartCanvas");
+
+        var WeatherChart = new Chart(ctx,{
+            type: "line",
+            data: {
+                labels: timeList,
+                datasets: [
+                    {
+                        label: "溫度",
+                        data: TList,
+                        fill: true,
+                        // 著色:
+                        backgroundColor: "rgba(14,72,100,0.2)",
+                        borderColor: "rgba(14,72,100,1.0)",
+                        borderWidth: 1
+                    },
+                    {
+                        label: "體感溫度",
+                        data: ATList,
+                        fill: false,
+                        // 著色:
+                        backgroundColor: "rgba(255,99,132,0.2)",
+                        borderColor: "rgba(255,99,132,1.0)",
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+              hover: {animationDuration: 0},
+              // title: {
+              //     display: true,
+              //     text: '今明溫度曲線'
+              // },
+              "animation": {
+                "duration": 600,
+                "onComplete": function() {
+                  var chartInstance = this.chart,
+                    ctx = chartInstance.ctx;
+                  //這裡還要研究字體顏色
+                    ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'bottom';
+
+                  this.data.datasets.forEach(function(dataset, i) {
+                    var meta = chartInstance.controller.getDatasetMeta(i);
+                    meta.data.forEach(function(bar, index) {
+                      var data = dataset.data[index];
+                      ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                    });
+                  });
+                }
+              },
+              scales: { 
+                xAxes: [{ 
+                  gridLines: { 
+                    display : false, 
+                  }, 
+                }], 
+                yAxes: [{ 
+                  ticks: {
+                    //display: false, 
+                    suggestedMin: CminT-5,
+                    suggestedMax: 45,
+                    stepSize: 5
+                  },
+                  gridLines: { 
+                    display : false, 
+                  } 
+                }] 
+              }, 
+            }
+            
+            
+        })
+      }
+
         
       
     })

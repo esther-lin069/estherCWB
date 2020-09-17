@@ -13,4 +13,9 @@ class ThreeDay extends Model
     {
         return $this->belongsTo('App\City');
     }
+
+    public function getDataTimeAttribute($value)
+    {
+        return ($value);
+    }
 }
