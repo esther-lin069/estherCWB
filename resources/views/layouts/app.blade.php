@@ -28,7 +28,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
 
 
-    <link rel="stylesheet" href="scss/main.css?v=<?=time()?>">
+    <link rel="stylesheet" href="css/main.css">
     <title>Weather</title>
 </head>
 <body>

@@ -1,0 +1,68 @@
+.pop {
+  width: inherit;
+  table-layout: fixed;
+}
+.pop table {
+  margin-left: 2%;
+  width: 102%;
+}
+.pop table td {
+  border: none;
+  width: 25%;
+}
+.pop table td i {
+  color: #333;
+}
+
+.weatherBox {
+  position: relative;
+  top: 60px;
+  width: 100%;
+  background-size: cover;
+  border-radius: 0.5em;
+  display: flex;
+  padding: 30px;
+}
+.weatherBox #weather-content {
+  color: white;
+}
+
+.weatherBox:after {
+  content: "";
+  position: absolute;
+  border-radius: 0.5em;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(120deg, #e76395, #33d0ff);
+  background-color: #333;
+  opacity: 0.5;
+}
+
+.weatherBox > * {
+  z-index: 100;
+}
+
+.week-card {
+  max-width: 18rem;
+  background: rgba(238, 238, 238, 0.372);
+}
+
+.rain-table {
+  margin-bottom: 50vh;
+  background: rgba(238, 238, 238, 0.372);
+}
+
+.title {
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 20px;
+}
+
+.wx-img {
+  width: 10px;
+  height: 10px;
+}
+
+/*# sourceMappingURL=main.css.map */
