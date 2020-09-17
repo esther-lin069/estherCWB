@@ -12,3 +12,5 @@
 */
 
 Route::get('/{location}', 'WeatherController@index');
+Route::post('/chart', 'WeatherController@chartData');
+

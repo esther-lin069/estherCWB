@@ -37,7 +37,7 @@
           <div class="card border-secondary week-card ">
               <div class="card-body text-center">
                   <h5 class="card-title">{{ $data->date }}</h5>
-                  <img style="width:60px;margin-bottom:15px;" src="${wximg}" alt="${wx}">
+                  <img style="width:60px;margin-bottom:15px;" src="${wximg}" alt="{{ $data->wx_num }}">
                   <p class="card-text">
                     <p style="font-size:10pt;">{{ $data->wx }}</p>
                     <span>{{ $data->minT }} - {{ $data->maxT }}°C</sapn><br>

@@ -1,6 +1,21 @@
 <script>
     $(function(){
-        console.log('EEE');
+
+
+      getChartData(1);
+      function getChartData($location){
+        var times = [];
+        var Tlist =  [];
+        var ATlist = [];
+
+        axios.post('/chart',{
+          location: 1,
+        }).then(function(obj){
+          console.log(obj.data);
+        })
+      }
+        
+      
     })
 </script>
 
